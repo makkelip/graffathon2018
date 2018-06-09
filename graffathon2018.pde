@@ -10,9 +10,7 @@ import moonlander.library.*;
 Moonlander moonlander;
 
 int CANVAS_W = 480;
-int CANVAS_H = 360;
-PVector flowfield[];
-PVector vector;
+int CANVAS_H = 680;
 
 void settings() {
   size(CANVAS_W, CANVAS_H, P3D);
@@ -25,7 +23,7 @@ void setup() {
   colorMode(HSB, 360, 100, 100);
 }
 
-Spikey s = new Spikey(0,0,50, 0.01);
+Spikey s = new Spikey(0,0,52, 10);
 
 void draw(){
   moonlander.update();
@@ -38,14 +36,17 @@ void draw(){
 class Spikey {
   
   int points, x, y;
-  float radius = 80;
+  float radius = 50;
   float change = 0;
-  float changeD;
-  Spikey(int x, int y, int points, float changeD) {
+  float changeD = 0.01;
+  float palmMod;
+  float palmAddition;
+  
+  Spikey(int x, int y, int points, float palmMod) {
     this.points = points;
     this.x = x;
     this.y = y;
-    this.changeD = changeD;
+    this.palmMod = palmMod;
   }
   
   void setRadius(float radius) {
@@ -54,20 +55,31 @@ class Spikey {
   
   void draw() {
     change += changeD;
-    if(change > 10) change = 0; 
+    if(change > 10) change = 0;
     PVector v;
     float section = PI/points;
     fill(255);
     beginShape();
     for (int i = 0; i < points; i++) {
       v = PVector.fromAngle(-section*i);
-      //if (i%2 == 0) {
-        v.setMag(noise(i/2+change)*100 + radius);
-      //} else {
-      //  v.setMag(100);
-      //}
+      if(i == points-1) v = PVector.fromAngle(PI);
+      if(section*i < HALF_PI) {
+        float m = (PI-section*i)/PI;
+        palmAddition = m*m*m*radius*palmMod;
+      } else {
+        float m = (PI-(PI-section*i))/PI;
+        palmAddition = m*m*m*radius*palmMod;
+      }
+      if(i%3 == 0) {
+        v.setMag(radius + palmAddition);
+      } else {
+        v.setMag(noise(i/2+change)*100 + radius + palmAddition);
+      }
       vertex(x+v.x,y+v.y);
     }
     endShape(CLOSE);
+    //varsi
+    beginShape();
+    
   }
 }
