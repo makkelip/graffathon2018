@@ -9,7 +9,7 @@ Minim minim;
 AudioPlayer song;
 
 float MARKINGS_DISTANCE = 600;
-float TREES_DISTANCE = 600;
+float TREES_DISTANCE = 800;
 float TREE_SIZE = 35;
 
 float VERT_VANISHING_POINT = height/2 - 10;
@@ -36,9 +36,9 @@ void setup() {
   frameRate(60);
   moonlander = Moonlander.initWithSoundtrack(this, "data/tekno_127bpm.mp3", 127, 8);
   // WINDOWS CONFIG
-  //moonlander.start("localhost", 1338, "syncdata.rocket");
+  moonlander.start("localhost", 1338, "syncdata.rocket");
   // LINUX CONFIG
-  moonlander.start("localhost", 9001, "syncdata.rocket");
+  //moonlander.start("localhost", 9001, "syncdata.rocket");
   
   //minim = new Minim(this);
   //song = minim.loadFile("data/Ouroboros.mp3");
@@ -66,6 +66,7 @@ void draw() {
   float beat = (float) moonlander.getValue("speed");
   
   //Drawings
+  noiseLines(musicNoise);
   drawRoad();
   moveRoadmarks(31.75);
   checkRoadmarks();
@@ -73,7 +74,6 @@ void draw() {
   drawHorizon();
   drawMoon();
   drawTrees();
-  noiseLines(musicNoise);
 }
 
 void noiseLines(float musicNoise) {
