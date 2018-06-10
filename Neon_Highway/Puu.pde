@@ -64,4 +64,16 @@ class Puu {
     vertex(x,y,z);
     endShape();
   }
+  
+  void moveCloser(float step) {
+    this.z += step;
+  }
+  
+  boolean isOutsideView(float limit) {
+    if(this.z < limit) {
+      return false;
+    } else {
+    return true;
+    }
+  }
 }
