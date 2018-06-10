@@ -174,7 +174,7 @@ void drawRoad() {
 
 void drawMoon() {
   imageMode(CENTER);
-  image(moon, 0, VERT_VANISHING_POINT - height/4);
+  image(moon, 0, VERT_VANISHING_POINT - height/3.5 );
 }
 
 void drawHorizon() {
