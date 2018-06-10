@@ -3,10 +3,12 @@ int spacing = 1; //space between ellipses
 float[] values; //array to store height values for the wave
 float yoff = 0.0f; //2nd dimension of perlin noise
 
+void settings() {
+  size(1280, 720);
+}
+
 void setup() {
-  size(500, 240);
   frameRate(30);
-  //colorMode(RGB, 255, 255, 255, 255);
   smooth();
   w = width + 16;
   values = new float[w / spacing];
@@ -17,9 +19,11 @@ void draw() {
   createWave(300.0f);
   createWave(150.0f);
   createWave(50.0f);
+  intro();
 }
 
 float amplitude;
+PFont font;
 
 void createWave(float amplitude) {
   float dx = 0.02f;
@@ -43,4 +47,11 @@ void createWave(float amplitude) {
     ellipseMode(CENTER);
     ellipse (x * spacing, width / 2 + values[x], 2, 2);
   }
+}
+
+void intro() {
+  font = createFont("../data/METAG.TTF", 24);
+  textFont(font);
+  text("mahapoydal_ATK proudly presents", 100, 100);
+  text("joojoo", 200, 200);
 }
