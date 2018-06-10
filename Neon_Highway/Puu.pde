@@ -1,17 +1,18 @@
 class Puu {
   
-  int points = 52;
-  int x, y;
-  int size;
+  float points = 52;
+  float x, y, z;
+  float size;
   float change = 0;
   float changeD = 0.01;
   float palmMod;
   float palmAddition;
-  int varsiSize;
+  float varsiSize;
   
-  Puu(int x, int y,int size) {
+  Puu(float x, float y, float z, float size) {
     this.x = x;
     this.y = y;
+    this.z = z;
     this.size = size;
     varsiSize = size*6;
   }
@@ -21,6 +22,10 @@ class Puu {
   }
   
   void draw() {
+    //stroke(#ff0081);
+    noStroke();
+    fill(#ff0081);
+    strokeWeight(2);
     change += changeD;
     if(change > 10) change = 0;
     PVector v;
@@ -41,7 +46,7 @@ class Puu {
       } else {
         v.setMag(noise(i/2+change)*palmMod*50 + size + palmAddition);
       }
-      vertex(x+v.x,y+v.y);
+      vertex(x+v.x,y+v.y, z + v.z);
     }
     endShape();
     //varsi

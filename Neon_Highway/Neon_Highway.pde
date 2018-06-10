@@ -4,14 +4,13 @@ import ddf.minim.*;
 // Our public Moonlander instance
 Moonlander moonlander;
 
-int CANVAS_WIDTH = 1600;
-int CANVAS_HEIGHT = 900;
-
 // Needed for audio
 Minim minim;
 AudioPlayer song;
 
-float DISTANCE_BETWEEN_MARKINGS = 600;
+float MARKINGS_DISTANCE = 600;
+float TREES_DISTANCE = 600;
+float TREE_SIZE = 35;
 
 float VERT_VANISHING_POINT = height/2 - 10;
 
@@ -21,7 +20,8 @@ float roadMarkZ1 = 100;
 float roadMarkZ2 = roadMarkZ1 + 30;
 
 ArrayList<Roadmark> marks = new ArrayList();
-Puu[] puut = new Puu[6];
+ArrayList<Puu> treesLeft = new ArrayList();
+ArrayList<Puu> treesRight = new ArrayList();
 
 //Blurred moon image
 PImage moon;
@@ -35,7 +35,10 @@ void settings() {
 void setup() {
   frameRate(60);
   moonlander = Moonlander.initWithSoundtrack(this, "data/tekno_127bpm.mp3", 127, 8);
-  moonlander.start("localhost", 1338, "syncdata.rocket");
+  // WINDOWS CONFIG
+  //moonlander.start("localhost", 1338, "syncdata.rocket");
+  // LINUX CONFIG
+  moonlander.start("localhost", 9001, "syncdata.rocket");
   
   //minim = new Minim(this);
   //song = minim.loadFile("data/Ouroboros.mp3");
@@ -43,6 +46,7 @@ void setup() {
   moon = loadImage("data/moon.png");
   //moon = loadImage("data/moon2.png");
   generateRoadMarks();
+  initTrees();
 }
 
 
@@ -67,9 +71,8 @@ void draw() {
   checkRoadmarks();
   drawRoadmarks();
   drawHorizon();
-  //drawMoon();
-  imageMode(CENTER);
-  image(moon, 0, VERT_VANISHING_POINT - height/4);
+  drawMoon();
+  drawTrees();
   noiseLines(musicNoise);
 }
 
@@ -99,9 +102,29 @@ void noiseLines(float musicNoise) {
 
 void generateRoadMarks() {
   
-  float firstZ1 = 0;
-  for(int i = 0; i < 9000; i += DISTANCE_BETWEEN_MARKINGS) {
-    marks.add(new Roadmark((firstZ1 - i)));
+  float initialZ = 0;
+  for(int i = 0; i < 9000; i += MARKINGS_DISTANCE) {
+    marks.add(new Roadmark((initialZ - i)));
+  }
+}
+
+void initTrees() {
+  
+  float initialZ = 0;
+  for(int i = 0; i < 9000; i += TREES_DISTANCE) {
+    treesLeft.add(new Puu(-500, 0, initialZ - i, TREE_SIZE));
+  }
+  for(int i = 0; i < 9000; i += TREES_DISTANCE) {
+    treesRight.add(new Puu(500, 0, initialZ - i, TREE_SIZE));
+  }
+}
+
+void drawTrees() {
+  for(Puu tree : treesLeft) {
+    tree.draw();
+  }
+  for(Puu tree : treesRight) {
+    tree.draw();
   }
 }
 
@@ -121,7 +144,7 @@ void drawRoadmarks() {
 void checkRoadmarks() {
   if(marks.get(0).isOutsideView(200)) {
     marks.remove(0);
-    marks.add(new Roadmark(marks.get(marks.size() - 1).z1 - DISTANCE_BETWEEN_MARKINGS));
+    marks.add(new Roadmark(marks.get(marks.size() - 1).z1 - MARKINGS_DISTANCE));
   }
 }
 
@@ -145,6 +168,11 @@ void drawRoad() {
    VERT_VANISHING_POINT - 5, //Y2
    100 //Z2
    );
+}
+
+void drawMoon() {
+  imageMode(CENTER);
+  image(moon, 0, VERT_VANISHING_POINT - height/4);
 }
 
 void drawHorizon() {

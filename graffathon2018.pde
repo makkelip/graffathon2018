@@ -9,8 +9,8 @@ import moonlander.library.*;
 
 Moonlander moonlander;
 
-int CANVAS_W = 480;
-int CANVAS_H = 680;
+int CANVAS_W = 1600;
+int CANVAS_H = 900;
 
 void settings() {
   size(CANVAS_W, CANVAS_H, P3D);
