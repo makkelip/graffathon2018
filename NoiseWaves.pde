@@ -1,23 +1,9 @@
-import moonlander.library.*;
-
-import ddf.minim.*;
-import ddf.minim.analysis.*;
-import ddf.minim.effects.*;
-import ddf.minim.signals.*;
-import ddf.minim.spi.*;
-import ddf.minim.ugens.*;
-
 int w; //width of the wave
 int spacing = 1; //space between ellipses
 float[] values; //array to store height values for the wave
 float yoff = 0.0f; //2nd dimension of perlin noise
 
-void settings() {
-  size(1280, 720);
-  fullScreen(P3D); 
-}
-
-void setup() {
+void setupNoiseWave() {
   frameRate(30);
   //colorMode(RGB, 255, 255, 255, 255);
   smooth();
@@ -25,7 +11,7 @@ void setup() {
   values = new float[w / spacing];
 }
 
-void draw() {
+void drawNoiseWave() {
   background(0);
   createWave(300.0f);
   createWave(150.0f);

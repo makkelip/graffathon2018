@@ -1,13 +1,3 @@
-import moonlander.library.*;
-import ddf.minim.*;
-
-// Our public Moonlander instance
-Moonlander moonlander;
-
-// Needed for audio
-Minim minim;
-AudioPlayer song;
-
 float MARKINGS_DISTANCE = 600;
 float TREES_DISTANCE = 800;
 float TREE_SIZE = 35;
@@ -24,35 +14,13 @@ ArrayList<Roadmark> marks = new ArrayList();
 ArrayList<Puu> treesLeft = new ArrayList();
 ArrayList<Puu> treesRight = new ArrayList();
 
-//Blurred moon image
-PImage moon;
-
-void settings() {
-  fullScreen(P3D);
-}
-
-void setup() {
-  frameRate(60);
-  moonlander = Moonlander.initWithSoundtrack(this, "../data/Night_Prowler.mp3", 110, 8);
-  // WINDOWS CONFIG
-  //moonlander.start("localhost", 1338, "syncdata.rocket");
-  // LINUX CONFIG
-  moonlander.start("localhost", 9001, "syncdata.rocket");
-  
-  //minim = new Minim(this);
-  //song = minim.loadFile("data/Ouroboros.mp3");
-  //song.play();
-  moon = loadImage("data/moon.png");
-  //moon = loadImage("data/moon2.png");
-  generateRoadMarks();
-  initTrees();
-}
-
-
 /*
  * Processing's drawing method
  */
-void draw() {
+
+float beat;
+
+void drawHightway() {
   noCursor();
   //scale(width/1000);
   translate(width/2, height/2, 0);
@@ -62,15 +30,16 @@ void draw() {
   
   //Rocket values
   float musicNoise = (float) moonlander.getValue("noiseFactor");
-  float beat = (float) moonlander.getValue("speed");
-  
+  beat = (float) moonlander.getValue("speed");
+  beatTrees();
   //Drawings
   scale(5,5);
   noiseLines(musicNoise);
   scale(0.2,0.2);
   
-  moveRoadmarks(31.75);
-  moveTrees(31.75);
+ 
+  moveRoadmarks(40.5);
+  moveTrees(27.5);
     
   checkRoadmarksAndTrees();
   
@@ -106,6 +75,13 @@ void noiseLines(float musicNoise) {
       line(x, VERT_VANISHING_POINT, NOISEBARS_DISTANCE, 
            x, VERT_VANISHING_POINT - noiseVal * 200, NOISEBARS_DISTANCE);
     }
+  }
+}
+
+void beatTrees() {
+  for (int i = 0; i < treesLeft.size(); i++) {
+    treesLeft.get(i).setMod(beat);
+    treesRight.get(i).setMod(beat);
   }
 }
 

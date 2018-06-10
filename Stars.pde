@@ -1,13 +1,12 @@
 Star[] stars = new Star[1000];
 
-void setup() {
-  size(500, 240);
+void setupStars() {
   for (int i = 0; i < stars.length; i++) {
     stars[i] = new Star();
   }
 }
 
-void draw() {
+void drawStars() {
   background(0);
   translate(width/2, height/2);
   
