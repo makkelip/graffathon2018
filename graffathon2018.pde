@@ -21,8 +21,8 @@ void settings() {
 void setup() {
   frameRate(60);
   moonlander = Moonlander.initWithSoundtrack(this, "data/Night_Prowler.mp3", 110, 1);
-  //moonlander.start("localhost", 1338, "syncdata.rocket");
-  moonlander.start();
+  moonlander.start("localhost", 1338, "syncdata.rocket");
+  //moonlander.start();
   background(0);
   noStroke();
   moon = loadImage("data/moon.png");
@@ -49,6 +49,9 @@ void draw() {
     strokeWeight(3);
     drawStars();
   } else if  (currentScene == 4) {
-    exit();
+    drawStars();
+    showGreets();
+  } else if (currentScene == 5) {
+    exit(); 
   }
 }
