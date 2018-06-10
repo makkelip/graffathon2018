@@ -1,38 +1,3 @@
-import ddf.minim.*;
-import ddf.minim.analysis.*;
-import ddf.minim.effects.*;
-import ddf.minim.signals.*;
-import ddf.minim.spi.*;
-import ddf.minim.ugens.*;
-
-import moonlander.library.*;
-
-Moonlander moonlander;
-
-int CANVAS_W = 480;
-int CANVAS_H = 680;
-
-void settings() {
-  size(CANVAS_W, CANVAS_H, P3D);
-}
-
-void setup() {
-  moonlander = Moonlander.initWithSoundtrack(this, "../data/tekno_127bpm.mp3", 127*2, 8);
-  moonlander.start();
-  frameRate(60);
-  colorMode(HSB, 360, 100, 100);
-}
-
-Puu s = new Puu(0,0, 30);
-
-void draw(){
-  moonlander.update();
-  background(140);
-  translate(CANVAS_W/2, CANVAS_H/2);
-  s.setMod((float)moonlander.getValue("beat"));
-  s.draw();
-}
-
 class Puu {
   
   int points = 52;

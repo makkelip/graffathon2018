@@ -21,19 +21,21 @@ float roadMarkZ1 = 100;
 float roadMarkZ2 = roadMarkZ1 + 30;
 
 ArrayList<Roadmark> marks = new ArrayList();
+Puu[] puut = new Puu[6];
 
 //Blurred moon image
 PImage moon;
 
 void settings() {
   // The P3D parameter enables accelerated 3D rendering.
-  size(CANVAS_WIDTH, CANVAS_HEIGHT, P3D);
+  //size(CANVAS_WIDTH, CANVAS_HEIGHT, P3D);
+  fullScreen(P3D);
 }
 
 void setup() {
   frameRate(60);
   moonlander = Moonlander.initWithSoundtrack(this, "data/tekno_127bpm.mp3", 127, 8);
-  moonlander.start("localhost", 9001, "syncdata.rocket");
+  moonlander.start("localhost", 1338, "syncdata.rocket");
   
   //minim = new Minim(this);
   //song = minim.loadFile("data/Ouroboros.mp3");
@@ -128,7 +130,7 @@ void drawRoad() {
   stroke(#42C6FF);
   strokeWeight(4);
   line(
-    -(width - 10), //X1d
+    -(width - 10), //X1
     height, //Y1
     -70, //Z1
     -2, //X2
