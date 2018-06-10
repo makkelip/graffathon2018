@@ -38,12 +38,13 @@ void createWave(float amplitude) {
   //Simple way to draw the wave with an ellipse at each location
   for (int x = 0; x < values.length; x++) {
     noStroke();
-    fill(244, 34, 90);
+    fill(#42c6ff);
     ellipseMode(CENTER);
     ellipse (x * spacing, width / 2 + values[x], 2, 2);
   }
   PFont font;
   font = createFont("../data/METAG.TTF", 28);
+  fill(#ff0081);
   textFont(font);
   text("m a h a p o y d a l _ A T K   p r o u d l y   p r e s e n t s", width/30, height/7.2);
   text("f i r s t   t i e m", width/2.4, height/2.8);

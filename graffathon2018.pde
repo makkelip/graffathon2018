@@ -52,6 +52,7 @@ void draw() {
   } else if  (currentScene == 4) {
     strokeWeight(2);
     drawStars();
+    moveText(2);
     showGreets();
   } else if (currentScene == 5) {
     exit(); 
