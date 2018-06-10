@@ -13,11 +13,11 @@ float[] values; //array to store height values for the wave
 float yoff = 0.0f; //2nd dimension of perlin noise
 
 void settings() {
+  size(1280, 720);
   fullScreen(P3D); 
 }
 
 void setup() {
-  size(1280, 720);
   frameRate(30);
   //colorMode(RGB, 255, 255, 255, 255);
   smooth();
