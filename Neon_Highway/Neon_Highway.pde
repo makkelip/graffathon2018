@@ -11,7 +11,7 @@ AudioPlayer song;
 float MARKINGS_DISTANCE = 600;
 float TREES_DISTANCE = 800;
 float TREE_SIZE = 35;
-float NOISEBARS_DISTANCE = -2000;
+float NOISEBARS_DISTANCE = -7000;
 
 float VERT_VANISHING_POINT = height/2 - 10;
 
@@ -35,9 +35,9 @@ void setup() {
   frameRate(60);
   moonlander = Moonlander.initWithSoundtrack(this, "data/tekno_127bpm.mp3", 127, 8);
   // WINDOWS CONFIG
-  //moonlander.start("localhost", 1338, "syncdata.rocket");
+  moonlander.start("localhost", 1338, "syncdata.rocket");
   // LINUX CONFIG
-  moonlander.start("localhost", 9001, "syncdata.rocket");
+  //moonlander.start("localhost", 9001, "syncdata.rocket");
   
   //minim = new Minim(this);
   //song = minim.loadFile("data/Ouroboros.mp3");
@@ -65,7 +65,9 @@ void draw() {
   float beat = (float) moonlander.getValue("speed");
   
   //Drawings
+  scale(5,5);
   noiseLines(musicNoise);
+  scale(0.2,0.2);
   
   moveRoadmarks(31.75);
   moveTrees(31.75);
@@ -80,7 +82,6 @@ void draw() {
 }
 
 void noiseLines(float musicNoise) {
-  scale(3,3);
   float noiseScale = 0.02;
   noFill();
   strokeWeight(1);
@@ -106,7 +107,6 @@ void noiseLines(float musicNoise) {
            x, VERT_VANISHING_POINT - noiseVal * 100, NOISEBARS_DISTANCE);
     }
   }
-  scale(1,1);
 }
 
 void generateRoadMarks() {
@@ -120,11 +120,11 @@ void generateRoadMarks() {
 void initTrees() {
   
   float initialZ = 0;
-  for(int i = 0; i < 9000; i += TREES_DISTANCE) {
-    treesLeft.add(new Puu(-500, 0, initialZ - i, TREE_SIZE));
+  for(int i = 0; i < 6000; i += TREES_DISTANCE) {
+    treesLeft.add(new Puu(-500, 250, initialZ - i, TREE_SIZE));
   }
-  for(int i = 0; i < 9000; i += TREES_DISTANCE) {
-    treesRight.add(new Puu(500, 0, initialZ - i, TREE_SIZE));
+  for(int i = 0; i < 6000; i += TREES_DISTANCE) {
+    treesRight.add(new Puu(500, 250, initialZ - i, TREE_SIZE));
   }
 }
 
@@ -164,13 +164,13 @@ void checkRoadmarksAndTrees() {
     marks.remove(0);
     marks.add(new Roadmark(marks.get(marks.size() - 1).z1 - MARKINGS_DISTANCE));
   }
-  if(treesLeft.get(0).isOutsideView(200)) {
+  if(treesLeft.get(0).isOutsideView(500)) {
     treesLeft.remove(0);
-    treesLeft.add(new Puu(-500, 0, treesLeft.get(treesLeft.size() - 1).z - MARKINGS_DISTANCE, TREE_SIZE));
+    treesLeft.add(new Puu(-500, 250, treesLeft.get(treesLeft.size() - 1).z - MARKINGS_DISTANCE, TREE_SIZE));
   }
-  if(treesRight.get(0).isOutsideView(200)) {
+  if(treesRight.get(0).isOutsideView(500)) {
     treesRight.remove(0);
-    treesRight.add(new Puu(500, 0, treesRight.get(treesRight.size() - 1).z - MARKINGS_DISTANCE, TREE_SIZE));
+    treesRight.add(new Puu(500, 250, treesRight.get(treesRight.size() - 1).z - MARKINGS_DISTANCE, TREE_SIZE));
   }
 }
 
@@ -204,5 +204,7 @@ void drawMoon() {
 void drawHorizon() {
   noFill();
   stroke(#42C6FF);
-  line((-width/2), VERT_VANISHING_POINT, width, VERT_VANISHING_POINT);
+  scale(5,5);
+  line((-width/2)*3, VERT_VANISHING_POINT, -6001, width, VERT_VANISHING_POINT,-6001);
+  scale(0.2,0.2);
 }

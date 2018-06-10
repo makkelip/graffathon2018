@@ -52,16 +52,16 @@ class Puu {
       } else {
         v.setMag(noise(i/2+change)*palmMod*50 + size + palmAddition);
       }
-      vertex(x+v.x,y+v.y, z+v.z);
+      vertex(x+v.x,y-varsiSize+v.y, z+v.z);
     }
     endShape();
     //varsi
     beginShape();
-    vertex(x+varsiSize*0.083,y+varsiSize/2, z);
-    vertex(x+varsiSize*0.083,y+varsiSize, z);
-    vertex(x-varsiSize*0.045,y+varsiSize, z);
-    vertex(x,y+varsiSize/2, z);
-    vertex(x,y,z);
+    vertex(x+varsiSize*0.083,y+varsiSize/2-varsiSize, z);
+    vertex(x+varsiSize*0.083,y+varsiSize-varsiSize, z);
+    vertex(x-varsiSize*0.045,y+varsiSize-varsiSize, z);
+    vertex(x,y+varsiSize/2-varsiSize, z);
+    vertex(x,y-varsiSize,z);
     endShape();
   }
   
