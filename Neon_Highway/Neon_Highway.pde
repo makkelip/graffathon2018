@@ -33,11 +33,11 @@ void settings() {
 
 void setup() {
   frameRate(60);
-  moonlander = Moonlander.initWithSoundtrack(this, "data/tekno_127bpm.mp3", 127, 8);
+  moonlander = Moonlander.initWithSoundtrack(this, "../data/Night_Prowler.mp3", 110, 8);
   // WINDOWS CONFIG
-  moonlander.start("localhost", 1338, "syncdata.rocket");
+  //moonlander.start("localhost", 1338, "syncdata.rocket");
   // LINUX CONFIG
-  //moonlander.start("localhost", 9001, "syncdata.rocket");
+  moonlander.start("localhost", 9001, "syncdata.rocket");
   
   //minim = new Minim(this);
   //song = minim.loadFile("data/Ouroboros.mp3");
@@ -86,25 +86,25 @@ void noiseLines(float musicNoise) {
   noFill();
   strokeWeight(1);
   color c = #42C6FF;
-  for (int x=-width; x < width; x += 5) {
-    float noiseVal = noise((musicNoise+x)*noiseScale, musicNoise*noiseScale);
+  for (int x=-width; x < width; x += 10) {
+    float noiseVal = noise((musicNoise + x)*noiseScale, musicNoise*noiseScale);
     stroke(c);
     if(x > -140 && x < 140) {
       if(x > - 100 && x < 100) {
         if(x > -10 && x < 10) {
           line(x, VERT_VANISHING_POINT, NOISEBARS_DISTANCE,
-               x, VERT_VANISHING_POINT - noiseVal * 0.5, NOISEBARS_DISTANCE);
+               x, VERT_VANISHING_POINT - noiseVal * 50, NOISEBARS_DISTANCE);
         } else {
           line(x, VERT_VANISHING_POINT, NOISEBARS_DISTANCE,
-               x, VERT_VANISHING_POINT - noiseVal * 100/1.5, NOISEBARS_DISTANCE);
+               x, VERT_VANISHING_POINT - noiseVal * 100, NOISEBARS_DISTANCE);
         }
       } else {
         line(x, VERT_VANISHING_POINT, NOISEBARS_DISTANCE,
-             x, VERT_VANISHING_POINT - noiseVal * 100, NOISEBARS_DISTANCE);
+             x, VERT_VANISHING_POINT - noiseVal * 150, NOISEBARS_DISTANCE);
       }
     } else {
       line(x, VERT_VANISHING_POINT, NOISEBARS_DISTANCE, 
-           x, VERT_VANISHING_POINT - noiseVal * 100, NOISEBARS_DISTANCE);
+           x, VERT_VANISHING_POINT - noiseVal * 200, NOISEBARS_DISTANCE);
     }
   }
 }
