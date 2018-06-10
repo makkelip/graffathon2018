@@ -159,7 +159,7 @@ void drawRoad() {
     height, //Y1
     -70, //Z1
     -2, //X2
-    VERT_VANISHING_POINT - 5, //Y2
+    VERT_VANISHING_POINT - 15, //Y2
     100 //Z2
     );
   line(
@@ -167,7 +167,7 @@ void drawRoad() {
    height, //Y1
    -70, //Z1
    2, //X2
-   VERT_VANISHING_POINT - 5, //Y2
+   VERT_VANISHING_POINT - 15, //Y2
    100 //Z2
    );
 }

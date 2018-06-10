@@ -17,13 +17,13 @@ void drawStars() {
 }
 void showGreets() {
   PFont font;
-  font = createFont("../data/METAG.TTF", 28);
+  font = createFont("../data/METAG.TTF", 48);
   textFont(font);
   fill(244, 34, 90);
-  text("G r e e t i n g s", width / 200, 0 - 50);
+  text("G r e e t i n g s", width / 200, -70);
   textAlign(CENTER, TOP);
-  text("G r a f f a t h o n  2 O 1 B", width / 200, 0 - 40);
+  text("G r a f f a t h o n  2 O 1 B", width / 200, -50);
   textAlign(CENTER, CENTER);
-  text("m a h a p o y d a l _ A T K", width / 200, height / 20);
+  text("m a h a p o y d a l _ A T K", width / 200, height / 15);
   textAlign(CENTER, BOTTOM); 
 }

@@ -31,6 +31,7 @@ void setup() {
   setupNoiseWave();
   setupStars();
   colorMode(RGB);
+  noCursor();
 }
 
 void draw() {
@@ -49,6 +50,7 @@ void draw() {
     strokeWeight(3);
     drawStars();
   } else if  (currentScene == 4) {
+    strokeWeight(2);
     drawStars();
     showGreets();
   } else if (currentScene == 5) {
