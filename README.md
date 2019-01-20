@@ -1,4 +1,4 @@
-## Graffathon 2018 Demo repository
+## First Tiem - Graffathon 2018 Demo repository
 
 Team members:
 Markus Pikkanen
